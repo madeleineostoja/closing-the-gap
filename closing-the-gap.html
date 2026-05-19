@@ -1,0 +1,2339 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closing the Gap</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/simple.min.css"
+      id="theme"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #f5f0e8;
+        --cream-dark: #ebe4d6;
+        --terracotta: #c5654a;
+        --terracotta-light: #d4826d;
+        --terracotta-dark: #a84e36;
+        --ink: #1a1614;
+        --ink-soft: #3d3632;
+        --ink-muted: #7a706a;
+        --sand: #d9cebc;
+        --warm-white: #faf8f4;
+      }
+
+      .reveal-viewport {
+        background: var(--cream);
+      }
+
+      .reveal {
+        font-family: "DM Sans", sans-serif;
+        font-size: 28px;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .reveal .slides {
+        text-align: left;
+      }
+
+      .reveal .slides section {
+        padding: 60px 80px;
+        box-sizing: border-box;
+        height: 100%;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* ── Slide types ── */
+
+      /* Title slides */
+      .slide-title {
+        text-align: center !important;
+        align-items: center !important;
+      }
+
+      .slide-title h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: 2.6em;
+        font-weight: 400;
+        line-height: 1.15;
+        color: var(--ink);
+        margin: 0;
+        max-width: 820px;
+      }
+
+      .slide-title .subtitle {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.65em;
+        color: var(--ink-muted);
+        margin-top: 24px;
+        font-weight: 300;
+        letter-spacing: 0.04em;
+      }
+
+      /* Concept slide subtitles (heading + subheading pattern) */
+      .slide-concept .concept-subtitle {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9em;
+        color: var(--ink-muted);
+        margin-top: -8px;
+        margin-bottom: 24px;
+        font-weight: 300;
+        letter-spacing: 0.02em;
+      }
+
+      /* Practical slide subtitles */
+      .slide-practical .concept-subtitle {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9em;
+        color: var(--ink-muted);
+        margin-top: -20px;
+        margin-bottom: 24px;
+        font-weight: 300;
+        letter-spacing: 0.02em;
+        text-align: center;
+        width: 100%;
+      }
+
+      /* Transition slides */
+      .slide-transition {
+        text-align: center !important;
+        align-items: center !important;
+        background: var(--ink) !important;
+      }
+
+      .slide-transition h2 {
+        font-family: "DM Serif Display", serif;
+        font-size: 2.2em;
+        font-weight: 400;
+        color: var(--cream);
+        line-height: 1.2;
+        margin: 0;
+        max-width: 700px;
+      }
+
+      .slide-transition .accent-bar {
+        width: 48px;
+        height: 3px;
+        background: var(--terracotta);
+        margin: 0 auto 32px;
+        border-radius: 2px;
+      }
+
+      /* Concept slides */
+      .slide-concept {
+        align-items: center !important;
+        text-align: center !important;
+      }
+
+      .slide-concept h2 {
+        font-family: "DM Serif Display", serif;
+        font-size: 2.4em;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--ink);
+        margin: 0 0 32px;
+        max-width: 800px;
+      }
+
+      .slide-concept .visual {
+        margin-top: 16px;
+      }
+
+      /* Practical slides */
+      .slide-practical h2 {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.6em;
+        font-weight: 400;
+        color: var(--ink);
+        margin: 0 0 36px;
+        text-align: center;
+        width: 100%;
+      }
+
+      .slide-practical .section-label {
+        text-align: center;
+        width: 100%;
+      }
+
+      /* ── Reusable components ── */
+
+      .shift-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        margin-top: 32px;
+        font-size: 1.1em;
+      }
+
+      .shift-arrow .from {
+        color: var(--ink-muted);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 400;
+        font-size: 1.3em;
+      }
+
+      .shift-arrow .arrow {
+        color: var(--terracotta);
+        font-size: 1.4em;
+      }
+
+      .shift-arrow .to {
+        color: var(--terracotta-dark);
+        font-family: "DM Serif Display", serif;
+        font-size: 1.4em;
+      }
+
+      /* Diagram containers */
+      .diagram {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        align-items: stretch;
+        margin-top: 24px;
+        flex-wrap: wrap;
+      }
+
+      .diagram-card {
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 12px;
+        padding: 28px 24px;
+        flex: 1;
+        min-width: 200px;
+        max-width: 280px;
+      }
+
+      .diagram-card h3 {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.05em;
+        font-weight: 400;
+        color: var(--terracotta-dark);
+        margin: 0 0 12px;
+      }
+
+      .diagram-card p {
+        font-size: 0.72em;
+        color: var(--ink-soft);
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      .diagram-card .icon {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+        display: block;
+      }
+
+      /* Context window box */
+      .context-window {
+        border: 2px solid var(--ink);
+        border-radius: 12px;
+        padding: 28px 32px;
+        max-width: 600px;
+        margin: 24px auto 0;
+        position: relative;
+        background: var(--warm-white);
+      }
+
+      .context-window .label {
+        position: absolute;
+        top: -13px;
+        left: 24px;
+        background: var(--cream);
+        padding: 0 10px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.65em;
+        color: var(--ink-muted);
+        letter-spacing: 0.06em;
+      }
+
+      .context-blocks {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .context-block {
+        background: var(--cream-dark);
+        border-radius: 6px;
+        padding: 10px 16px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.65em;
+        color: var(--ink-soft);
+        border: 1px solid var(--sand);
+      }
+
+      .context-block.highlight {
+        background: var(--terracotta);
+        color: var(--warm-white);
+        border-color: var(--terracotta-dark);
+      }
+
+      /* Two column comparison */
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-top: 24px;
+      }
+
+      .comparison-col {
+        border-radius: 12px;
+        padding: 28px 24px;
+      }
+
+      .comparison-col.bad {
+        background: #f0e8e6;
+        border: 1px solid #d4b8b2;
+      }
+
+      .comparison-col.good {
+        background: #e8f0e6;
+        border: 1px solid #b2c9ab;
+      }
+
+      .comparison-col h3 {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7em;
+        letter-spacing: 0.05em;
+        margin: 0 0 16px;
+        text-transform: uppercase;
+      }
+
+      .comparison-col.bad h3 {
+        color: #9a4a3a;
+      }
+      .comparison-col.good h3 {
+        color: #4a7a3a;
+      }
+
+      .comparison-col .line {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6em;
+        color: var(--ink-soft);
+        padding: 5px 0;
+        line-height: 1.5;
+      }
+
+      .comparison-col.bad .line {
+        opacity: 0.7;
+      }
+
+      /* Constraint visuals (Slide 5) */
+      .constraint-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin: 12px 0 14px;
+        min-height: 48px;
+      }
+
+      .context-box.overflow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        border: 2px solid var(--ink-muted);
+        border-radius: 6px;
+        padding: 6px;
+        width: 100px;
+        height: 44px;
+        overflow: visible;
+        position: relative;
+      }
+
+      .cbox-block {
+        width: 18px;
+        height: 14px;
+        background: var(--terracotta-light);
+        border-radius: 3px;
+      }
+
+      .cbox-block.spill {
+        background: var(--terracotta);
+        position: relative;
+        top: 2px;
+        opacity: 0.5;
+      }
+
+      .cbox-block.dim {
+        background: var(--sand);
+        opacity: 0.5;
+      }
+
+      .cbox-block.bright {
+        background: var(--terracotta);
+      }
+
+      .focus-visual {
+        gap: 10px !important;
+      }
+
+      .focus-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3px;
+        border: 2px solid var(--sand);
+        border-radius: 6px;
+        padding: 5px;
+        width: 54px;
+        min-height: 32px;
+        align-content: start;
+      }
+
+      .focus-box.curated {
+        border-color: var(--terracotta-light);
+      }
+
+      .rot-signal {
+        display: flex;
+        gap: 4px;
+        align-items: flex-end;
+      }
+
+      .rot-bar {
+        width: 14px;
+        height: 28px;
+        background: var(--terracotta);
+        border-radius: 3px;
+      }
+
+      /* Logos row */
+      .logos-row {
+        display: flex;
+        gap: 36px;
+        justify-content: center;
+        align-items: center;
+        margin: 24px 0;
+      }
+
+      .logos-row .tool-name {
+        font-family: "DM Mono", monospace;
+        font-size: 0.75em;
+        color: var(--ink-muted);
+        padding: 10px 20px;
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 8px;
+      }
+
+      .concepts-row {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .concepts-row span {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.7em;
+        color: var(--terracotta-dark);
+        font-weight: 500;
+      }
+
+      /* Harness shared concepts (Slide 7) */
+      .harness-shared {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        margin-top: 24px;
+      }
+
+      .harness-concept {
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 10px;
+        padding: 18px 24px;
+        text-align: center;
+        flex: 1;
+        max-width: 220px;
+      }
+
+      .harness-concept-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.72em;
+        color: var(--terracotta-dark);
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+
+      .harness-concept-detail {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.58em;
+        color: var(--ink-muted);
+        line-height: 1.4;
+      }
+
+      /* Layers visual */
+      .layers {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-width: 500px;
+        margin: 24px auto 0;
+      }
+
+      .layer {
+        border-radius: 8px;
+        padding: 14px 24px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.65em;
+        text-align: center;
+      }
+
+      .layer.persistent {
+        background: var(--terracotta);
+        color: var(--warm-white);
+        border: none;
+      }
+
+      .layer.ondemand {
+        background: var(--warm-white);
+        color: var(--ink-soft);
+        border: 2px dashed var(--sand);
+      }
+
+      /* On-demand layout (Slide 12) */
+      .ondemand-layout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 32px;
+      }
+
+      .ondemand-base {
+        background: var(--terracotta);
+        color: var(--warm-white);
+        border-radius: 10px;
+        padding: 22px 28px;
+        text-align: center;
+        min-width: 160px;
+      }
+
+      .ondemand-base-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7em;
+        font-weight: 500;
+      }
+
+      .ondemand-base-desc {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.55em;
+        opacity: 0.8;
+        margin-top: 4px;
+      }
+
+      .ondemand-modules {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .ondemand-skill {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6em;
+        padding: 10px 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .ondemand-skill.attached {
+        background: var(--warm-white);
+        border: 2px solid var(--terracotta-light);
+        color: var(--ink-soft);
+      }
+
+      .ondemand-skill.detached {
+        background: transparent;
+        border: 2px dashed var(--sand);
+        color: var(--ink-muted);
+      }
+
+      .skill-icon {
+        color: var(--terracotta);
+        margin-right: 6px;
+      }
+
+      /* Strike-through label */
+      .strikethrough-label {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.3em;
+        color: var(--ink-muted);
+        text-decoration: line-through;
+        text-decoration-color: var(--terracotta);
+        text-decoration-thickness: 3px;
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      .replace-label {
+        font-family: "DM Serif Display", serif;
+        font-size: 1.5em;
+        color: var(--terracotta-dark);
+      }
+
+      /* Forked skills visual (Slide 14) */
+      .fork-visual {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 28px;
+      }
+
+      .fork-box {
+        border-radius: 12px;
+        padding: 20px 28px;
+        text-align: center;
+      }
+
+      .fork-main {
+        border: 2px solid var(--sand);
+      }
+
+      .fork-isolated {
+        border: 2px solid var(--terracotta-light);
+        background: rgba(197, 101, 74, 0.06);
+      }
+
+      .fork-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65em;
+        margin-bottom: 8px;
+      }
+
+      .fork-main .fork-label {
+        color: var(--ink-muted);
+      }
+
+      .fork-isolated .fork-label {
+        color: var(--terracotta-dark);
+      }
+
+      .fork-inner {
+        background: var(--cream-dark);
+        border-radius: 6px;
+        padding: 8px 16px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.6em;
+        color: var(--ink-soft);
+      }
+
+      .fork-isolated .fork-inner {
+        background: var(--warm-white);
+      }
+
+      .fork-arrow {
+        font-size: 1.4em;
+        color: var(--terracotta);
+      }
+
+      /* Flow diagram */
+      .flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+      }
+
+      .flow-step {
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.7em;
+        color: var(--ink-soft);
+        font-weight: 500;
+      }
+
+      .flow-step.accent {
+        background: var(--terracotta);
+        color: var(--warm-white);
+        border-color: var(--terracotta-dark);
+      }
+
+      .flow-arrow {
+        color: var(--ink-muted);
+        font-size: 1.2em;
+      }
+
+      /* Isolation example (Slide 17) */
+      .isolation-example {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        margin-top: 20px;
+      }
+
+      .isolation-task {
+        background: var(--ink);
+        color: var(--cream);
+        padding: 14px 28px;
+        border-radius: 8px;
+      }
+
+      .isolation-task-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7em;
+      }
+
+      .isolation-arrow {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.6em;
+        color: var(--ink-muted);
+      }
+
+      .isolation-agents {
+        display: flex;
+        gap: 24px;
+      }
+
+      .isolation-agent {
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 10px;
+        padding: 18px 22px;
+        text-align: center;
+        min-width: 160px;
+      }
+
+      .isolation-concern {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.58em;
+        color: var(--ink-soft);
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+
+      .isolation-note {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.58em;
+        color: var(--ink-muted);
+        margin-top: 4px;
+      }
+
+      /* Subagent diagram */
+      .agent-tree {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .agent-parent {
+        background: var(--ink);
+        color: var(--cream);
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.7em;
+      }
+
+      .agent-children {
+        display: flex;
+        gap: 24px;
+      }
+
+      .agent-child {
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 10px;
+        padding: 18px 22px;
+        text-align: center;
+        min-width: 170px;
+      }
+
+      .child-label {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.7em;
+        color: var(--ink-soft);
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+
+      .child-files {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.6em;
+        color: var(--ink-muted);
+        line-height: 1.6;
+      }
+
+      .connector-line {
+        width: 2px;
+        height: 20px;
+        background: var(--ink-muted);
+        position: relative;
+      }
+
+      .connector-line::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 2px;
+        background: var(--ink-muted);
+      }
+
+      /* Agent team layout (Slide 20) */
+      .team-layout {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .team-agents {
+        display: flex;
+        gap: 24px;
+      }
+
+      .team-agent {
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 10px;
+        padding: 18px 22px;
+        text-align: center;
+        min-width: 150px;
+      }
+
+      .team-spec {
+        background: var(--ink);
+        color: var(--cream);
+        padding: 16px 32px;
+        border-radius: 8px;
+        text-align: center;
+        width: 100%;
+        max-width: 540px;
+      }
+
+      .team-spec-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7em;
+        font-weight: 500;
+      }
+
+      .team-spec-desc {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.55em;
+        opacity: 0.7;
+        margin-top: 4px;
+      }
+
+      /* Back pressure visual */
+      .back-pressure {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 24px;
+        align-items: center;
+        margin-top: 24px;
+      }
+
+      .bp-box {
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .bp-box.messy {
+        background: rgba(197, 101, 74, 0.1);
+        border: 1px solid rgba(197, 101, 74, 0.45);
+      }
+
+      .bp-box.clean {
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+      }
+
+      .bp-box h4 {
+        font-family: "DM Mono", monospace;
+        font-size: 0.6em;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 10px;
+        color: var(--ink-muted);
+      }
+
+      .bp-box p {
+        font-size: 0.68em;
+        color: var(--ink-soft);
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      .bp-arrow {
+        font-size: 1.8em;
+        color: var(--terracotta);
+      }
+
+      /* Closing recap */
+      .recap-items {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 28px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .recap-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 0.78em;
+      }
+
+      .recap-item .recap-label {
+        font-family: "DM Mono", monospace;
+        font-size: 0.85em;
+        color: var(--terracotta-dark);
+        min-width: 110px;
+        text-align: right;
+        font-weight: 500;
+      }
+
+      .recap-item .recap-desc {
+        color: var(--ink-soft);
+      }
+
+      /* Skill anatomy */
+      .skill-file {
+        background: var(--ink);
+        border-radius: 12px;
+        padding: 24px 28px;
+        max-width: 520px;
+        margin: 24px auto 0;
+        position: relative;
+      }
+
+      .skill-file .file-tab {
+        position: absolute;
+        top: -12px;
+        left: 20px;
+        background: var(--ink-soft);
+        padding: 4px 14px;
+        border-radius: 6px 6px 0 0;
+        font-family: "DM Mono", monospace;
+        font-size: 0.55em;
+        color: var(--cream);
+        letter-spacing: 0.03em;
+      }
+
+      .skill-line {
+        font-family: "DM Mono", monospace;
+        font-size: 0.58em;
+        line-height: 1.8;
+        color: #b5afa7;
+        position: relative;
+        padding-left: 0;
+      }
+
+      .skill-line .hl {
+        color: var(--terracotta-light);
+      }
+
+      .skill-line .comment {
+        color: #7a706a;
+        font-style: italic;
+      }
+
+      .annotation {
+        display: inline-block;
+        background: var(--terracotta-dark);
+        color: var(--warm-white);
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.55em;
+        padding: 2px 10px;
+        border-radius: 4px;
+        margin-left: 12px;
+        vertical-align: middle;
+        font-weight: 500;
+      }
+
+      /* Discussion slide */
+      .slide-discussion {
+        text-align: center !important;
+        align-items: center !important;
+      }
+
+      .slide-discussion h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: 3em;
+        font-weight: 400;
+        color: var(--ink);
+      }
+
+      .slide-discussion .prompt {
+        font-size: 0.7em;
+        color: var(--ink-muted);
+        margin-top: 16px;
+      }
+
+      /* Section label (above title) */
+      .section-label {
+        font-family: "DM Sans", sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--terracotta);
+        letter-spacing: 0.06em;
+        margin-bottom: 16px;
+        display: block;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .section-label::before {
+        content: "";
+        display: block;
+        width: 48px;
+        height: 3px;
+        background: var(--terracotta);
+        border-radius: 2px;
+        margin: 0 auto 14px;
+      }
+
+      .slide-transition .section-label {
+        color: var(--terracotta-light);
+      }
+
+      .slide-transition .section-label::before {
+        background: var(--terracotta-light);
+      }
+
+      /* Tool stack (Tools slide) */
+      .tool-stack {
+        border: 1px solid var(--sand);
+        border-radius: 12px;
+        padding: 32px 32px 24px;
+        max-width: 640px;
+        margin: 24px auto 0;
+        position: relative;
+        background: var(--warm-white);
+      }
+
+      .tool-stack .label {
+        position: absolute;
+        top: -11px;
+        left: 24px;
+        background: var(--cream);
+        padding: 0 10px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.6em;
+        color: var(--ink-muted);
+        letter-spacing: 0.06em;
+      }
+
+      .tool-stack-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .tool-stack-pills .tool-name {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65em;
+        color: var(--ink-muted);
+        padding: 8px 16px;
+        background: var(--cream);
+        border: 1px solid var(--sand);
+        border-radius: 8px;
+        margin: 0;
+      }
+
+      .tool-stack-pills .tool-name.unused {
+        opacity: 0.4;
+      }
+
+      .tool-tax-line {
+        font-family: "DM Mono", monospace;
+        font-size: 0.65em;
+        color: var(--ink-muted);
+        letter-spacing: 0.04em;
+        text-align: center;
+        margin-top: 18px;
+      }
+
+      /* Kitbash stack (Let's get weird) */
+      .kitbash {
+        position: relative;
+        height: 280px;
+        margin: 32px auto 0;
+        width: 720px;
+        max-width: 100%;
+      }
+
+      .kitbash-squiggle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 980px;
+        height: 380px;
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      .kitbash-card {
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        width: 220px;
+        background: var(--warm-white);
+        border: 1px solid var(--sand);
+        border-radius: 12px;
+        padding: 24px 20px;
+        text-align: center;
+        box-shadow: 0 10px 24px rgba(26, 22, 20, 0.12);
+        box-sizing: border-box;
+      }
+
+      .kitbash-card .kitbash-label {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1em;
+        font-weight: 500;
+        color: var(--terracotta-dark);
+        margin-bottom: 6px;
+      }
+
+      .kitbash-card .kitbash-sub {
+        font-family: "DM Mono", monospace;
+        font-size: 0.55em;
+        color: var(--ink-muted);
+        letter-spacing: 0.03em;
+      }
+
+      .kitbash-card.k1 {
+        transform: translate(-280px, -10px) rotate(-7deg);
+        z-index: 1;
+      }
+
+      .kitbash-card.k2 {
+        transform: translate(-100px, 40px) rotate(3deg);
+        z-index: 3;
+      }
+
+      .kitbash-card.k3 {
+        transform: translate(80px, -5px) rotate(8deg);
+        z-index: 2;
+      }
+
+      /* ── Reveal overrides ── */
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        text-transform: none;
+        font-family: "DM Serif Display", serif;
+        font-weight: 400;
+      }
+
+      .reveal .slide-number {
+        font-family: "DM Mono", monospace;
+        font-size: 12px;
+        color: var(--ink-muted);
+        background: transparent;
+        right: 32px;
+        bottom: 24px;
+      }
+
+      .reveal .controls {
+        color: var(--terracotta);
+      }
+
+      .reveal .progress span {
+        background: var(--terracotta);
+      }
+
+      /* Speaker notes styling */
+      .reveal .speaker-notes {
+        font-family: "DM Sans", sans-serif;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #333;
+      }
+
+      /* Hide timer and upcoming slide in speaker view */
+      .speaker-controls-time {
+        display: none !important;
+      }
+      .speaker-controls-notes .speaker-notes-next,
+      .reveal-viewport .speaker-view .slide-content + .slide-content,
+      #upcoming-slide {
+        display: none !important;
+      }
+      /* Target the upcoming slide wrapper in Reveal's speaker view */
+      .speaker-layout .slide-wrapper:nth-child(2) {
+        display: none !important;
+      }
+      .speaker-layout {
+        grid-template-columns: 1fr !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- ═══════════ SLIDE 1: Title ═══════════ -->
+        <section class="slide-title" data-background-color="#F5F0E8">
+          <h1>Closing the Gap</h1>
+          <aside class="notes">
+            <ul>
+              <li>
+                There's a pretty large gap between advanced agentic coding
+                patterns and basic prompting of tools like Claude Code
+              </li>
+              <li>
+                This talk is going to cover the basics, and it'll be things many
+                of you already know, but I want to make sure we are all
+                operating from a common ground
+              </li>
+              <li><strong>Transition:</strong> So what's the gap?</li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE 2: Prompt Enginering -> Context Engineering ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <div class="shift-arrow visual" style="margin-top: 0">
+            <span class="from">Prompt Engineering</span>
+            <span class="arrow">→</span>
+            <span class="to">Context Engineering</span>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                Agentic coding has moved from prompt engineering as a focus to
+                context engineering
+              </li>
+              <li>
+                Which means that rather than optimising the text we give the LLM
+                in any given prompt, we're optimising the systems that the LLM
+                is operating in
+              </li>
+              <li>
+                Because forefront models have gotten really good at
+                understanding intent, even with sloppy prompts. But they all
+                operate within a fundamental constraint, their context windows
+              </li>
+              <li><strong>Transition:</strong> So what's context anyway?</li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: What is context ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <span class="section-label">Context</span>
+          <h2>Oh sweet memories</h2>
+          <p class="concept-subtitle">What is context anyway</p>
+          <div class="context-window visual">
+            <div class="label">CONTEXT WINDOW</div>
+            <div class="context-blocks">
+              <div class="context-block highlight">System instructions</div>
+              <div class="context-block">Conversation history</div>
+              <div class="context-block">Files read</div>
+              <div class="context-block">Tool results</div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                To get definitions out of the way, the context window is the
+                LLMs current working memory
+              </li>
+              <li>
+                Basically, everything that has happened in the current session
+                (instructions, conversation, files read, tool uses) along with
+                whatever system prompts it has
+              </li>
+              <li>
+                That window has real constraints that degrade results if you
+                ignore them
+              </li>
+              <li>
+                <strong>Transition:</strong> Okay that's context, where does
+                engineering it come in?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE 5: Why engineer context ═══════════ -->
+        <section class="slide-practical" data-background-color="#F5F0E8">
+          <h2>Death by a thousand tokens</h2>
+          <p class="concept-subtitle">How context windows fail</p>
+          <div class="diagram">
+            <div class="diagram-card">
+              <h3>Size</h3>
+              <div class="constraint-visual">
+                <div class="context-box overflow">
+                  <div class="cbox-block"></div>
+                  <div class="cbox-block"></div>
+                  <div class="cbox-block"></div>
+                  <div class="cbox-block"></div>
+                  <div class="cbox-block"></div>
+                  <div class="cbox-block spill"></div>
+                  <div class="cbox-block spill"></div>
+                </div>
+              </div>
+              <p>There's a hard limit we can't hit</p>
+            </div>
+            <div class="diagram-card">
+              <h3>Focus</h3>
+              <div class="constraint-visual focus-visual">
+                <div class="focus-box stuffed">
+                  <div class="cbox-block dim"></div>
+                  <div class="cbox-block dim"></div>
+                  <div class="cbox-block dim"></div>
+                  <div class="cbox-block dim"></div>
+                  <div class="cbox-block dim"></div>
+                  <div class="cbox-block dim"></div>
+                </div>
+                <span style="color: var(--ink-muted); font-size: 0.8em"
+                  >vs</span
+                >
+                <div class="focus-box curated">
+                  <div class="cbox-block bright"></div>
+                  <div class="cbox-block bright"></div>
+                </div>
+              </div>
+              <p>Irrelevant context dilutes the good stuff.</p>
+            </div>
+            <div class="diagram-card">
+              <h3>Rot</h3>
+              <div class="constraint-visual">
+                <div class="rot-signal">
+                  <div class="rot-bar" style="opacity: 1"></div>
+                  <div class="rot-bar" style="opacity: 0.75"></div>
+                  <div class="rot-bar" style="opacity: 0.5"></div>
+                  <div class="rot-bar" style="opacity: 0.3"></div>
+                  <div class="rot-bar" style="opacity: 0.15"></div>
+                </div>
+              </div>
+              <p>Long sessions degrade early context.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                We broadly have a few fundamental limitations in LLM context —
+                size, focus, and rot
+              </li>
+              <li>
+                <strong>Size:</strong> Context windows have a fixed size. This
+                varies by model, and Anthropic are currently experimenting with
+                vastly larger windows than we currently have access to
+              </li>
+              <li>
+                When that window gets full, you need to kill the session. Most
+                harnesses have a feature called compaction, which basically
+                automates this by creating a little "handover summary" to the
+                next agent of everything that went into the context window of
+                your dead session. That used to be a black box, but most
+                harnesses now let you invoke it manually, scope what gets kept,
+                or hand off to a fresh session deliberately. Treat auto-compaction as a last resort,
+                not a feature — by the time it kicks in, the session has usually
+                already rotted
+              </li>
+              <li>
+                <strong>Focus:</strong> Even if you had an unlimited context
+                window, LLMs still benefit from being focussed, just like human
+                engineers do. If you throw a dozen completely unrelated issues
+                or tasks at an agent within one session it's going to get
+                awfully confused sooner or later
+              </li>
+              <li>
+                <strong>Rot:</strong> The mitigation to that problem creates
+                another one — context degradation. The longer a session goes on
+                and the more a context window fills with noise, the model's
+                attention to earlier instructions tends to degrade as it tethers
+                to the more recent context
+              </li>
+
+              <li>
+                <strong>Transition:</strong> So let's talk about the tools we
+                have at our disposal to mitigate these constraints
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: Harness Vocabulary ═══════════ -->
+        <section class="slide-practical" data-background-color="#F5F0E8">
+          <h2>Same model, different trenchcoat</h2>
+          <p class="concept-subtitle">Harnesses & shared vocabulary</p>
+          <div class="logos-row">
+            <span class="tool-name">Claude Code</span>
+            <span class="tool-name">Cursor</span>
+            <span class="tool-name">Pi</span>
+            <span class="tool-name">opencode</span>
+          </div>
+          <div class="harness-shared">
+            <div class="harness-concept">
+              <div class="harness-concept-label">Instructions</div>
+              <div class="harness-concept-detail">
+                Persistent context per session
+              </div>
+            </div>
+            <div class="harness-concept">
+              <div class="harness-concept-label">Skills</div>
+              <div class="harness-concept-detail">
+                On-demand context modules
+              </div>
+            </div>
+            <div class="harness-concept">
+              <div class="harness-concept-label">Tools</div>
+              <div class="harness-concept-detail">
+                What the agent can do
+              </div>
+            </div>
+            <div class="harness-concept">
+              <div class="harness-concept-label">Agents</div>
+              <div class="harness-concept-detail">Isolated context workers</div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                But before we do, it's important to realise almost nothing we're
+                going to talk about today is inherent to LLMs themselves.
+                They're orchestration patterns introduced by pieces of software,
+                the harnesses
+              </li>
+              <li>
+                Harnesses are converging on something approaching standards,
+                like base instructions, skills, and subagents.
+              </li>
+              <li>
+                But it's worth being aware of the opinionated ways your
+                particular harness has implemented these patterns, so that
+                understanding can transfer when something else is inevitbly the
+                new hotness later. Just like with any library or framework
+              </li>
+              <li>
+                We'll use generic terms throughout, but the ideas map onto
+                whichever harness you're using
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: Instructions ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <span class="section-label">Instructions</span>
+          <h2>AGENTS.md</h2>
+          <p class="concept-subtitle">Providing a baseline</p>
+          <aside class="notes">
+            <ul>
+              <li>
+                The first tool we have at our disposal is system instructions —
+                a markdown file at the project root that most harnesses load
+                automatically. AGENTS.md is the emerging cross-tool convention;
+                Claude Code calls it CLAUDE.md, Cursor has its own rules format,
+                but they all do the same job
+              </li>
+              <li>
+                This is loaded into the context window at the start of every
+                single session
+              </li>
+              <li>
+                It's one and only goal is to save time (ie: context) by telling
+                the agent things it needs to know very often, without it having
+                to go searching to figure it out repeatedly
+              </li>
+              <li>
+                <strong>Transition:</strong> Since this is in every single
+                session, every line must earn its place
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE 10: Good vs Bad CLAUDE.md ═══════════ -->
+        <section class="slide-practical" data-background-color="#F5F0E8">
+          <h2>Earn every line</h2>
+          <p class="concept-subtitle">Good vs. bad AGENTS.md</p>
+          <div class="comparison">
+            <div class="comparison-col bad">
+              <h3>✗ Harmful</h3>
+              <div class="line">"You are a really clever developer"</div>
+              <div class="line">"Write clean, maintainable code"</div>
+              <div class="line">"Use good variable names"</div>
+              <div class="line">"Write unit tests"</div>
+              <div class="line">[full list of project dependencies]</div>
+              <div class="line">... 200 lines of more generic advice</div>
+            </div>
+            <div class="comparison-col good">
+              <h3>✓ Helpful</h3>
+              <div class="line"># Bash commands</div>
+              <div class="line">pnpm test — Vitest, not Jest</div>
+              <div class="line">pnpm e2e — Playwright</div>
+              <div class="line"># Stack</div>
+              <div class="line">
+                React 19 + tRPC + Drizzle. Auth: custom JWT.
+              </div>
+              <div class="line"># Conventions</div>
+              <div class="line">
+                For DB patterns, see docs/db-conventions.md
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                The key principle here is that your instructions are the place
+                to tell the agent all the gotchas about your specific project it
+                needs to know about
+              </li>
+              <li>
+                It is not the place to tell the agent to be a good boy and write
+                really nice code
+              </li>
+              <li>
+                It is not the place to document every facet of your entire
+                architecture
+              </li>
+              <li>
+                It is not the place to summarise all the files in your project
+              </li>
+              <li>
+                <strong>Transition:</strong> So what about the stuff it needs to
+                know, but only sometimes
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: Always-on vs On-demand ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <span class="section-label">Skills</span>
+          <h2>You don't need all of that</h2>
+          <p class="concept-subtitle">On-demand context with skills</p>
+          <div class="ondemand-layout visual">
+            <div class="ondemand-base">
+              <div class="ondemand-base-label">AGENTS.md</div>
+              <div class="ondemand-base-desc">Loaded every session</div>
+            </div>
+            <div class="ondemand-modules">
+              <div class="ondemand-skill attached">
+                <span class="skill-icon">◆</span> add-api-endpoint
+              </div>
+              <div class="ondemand-skill detached">
+                <span class="skill-icon">◇</span> reviewing-pr
+              </div>
+              <div class="ondemand-skill detached">
+                <span class="skill-icon">◇</span> writing-migration
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>The next primitive we have at our disposal are skills</li>
+              <li>
+                You can think of skills as a progressive disclosure mechanism
+              </li>
+              <li>
+                Whereas AGENTS.md is the baseline for every agent in every
+                session, skills are discovered and read by agents as they need
+                them
+              </li>
+              <li>
+                If something should be known every session, like what testing
+                commands should be run, it belongs in AGENTS.md. If something
+                only relates to part of your codebase or certain tasks, like our
+                opinionated service architecture patterns for an internal API,
+                it belongs in a skill
+              </li>
+              <li><strong>Transition:</strong> So how do we write a skill?</li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE 13: Practical — Anatomy of a Skill ═══════════ -->
+        <section class="slide-practical" data-background-color="#F5F0E8">
+          <h2>Anatomy of a good skill</h2>
+          <div class="skill-file">
+            <div class="file-tab">add-api-endpoint/SKILL.md</div>
+            <div class="skill-line"><span class="hl">---</span></div>
+            <div class="skill-line">
+              name: <span class="hl">add-api-endpoint</span>
+              <span class="annotation">Trigger word</span>
+            </div>
+            <div class="skill-line">
+              description: <span class="hl">Add a new tRPC endpoint.</span>
+            </div>
+            <div class="skill-line">
+              <span class="hl"> Use when creating routes, adding</span>
+            </div>
+            <div class="skill-line">
+              <span class="hl"> API endpoints, or new procedures.</span>
+              <span class="annotation">Pushy description</span>
+            </div>
+            <div class="skill-line"><span class="hl">---</span></div>
+            <div class="skill-line">&nbsp;</div>
+            <div class="skill-line">
+              <span class="comment">## Steps</span>
+              <span class="annotation">Actionable, not educational</span>
+            </div>
+            <div class="skill-line">
+              1. Router in <span class="hl">src/server/routers/</span>
+            </div>
+            <div class="skill-line">2. Schema: Zod input + output types</div>
+            <div class="skill-line">
+              3. Query via Drizzle — <span class="hl">never raw SQL</span>
+            </div>
+            <div class="skill-line">
+              4. Test: <span class="hl">pnpm test</span> (Vitest, not Jest)
+            </div>
+            <div class="skill-line">&nbsp;</div>
+            <div class="skill-line">
+              <span class="comment">For DB patterns + conventions,</span>
+            </div>
+            <div class="skill-line">
+              <span class="comment">see docs/db-conventions.md</span>
+              <span class="annotation">Progressive disclosure</span>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                The easy answer is ask the agent to do it — most harnesses ship
+                a skill-writing skill that's pretty great. But let's cover the
+                principles too
+              </li>
+              <li>
+                <strong>Concise:</strong> Context window is a shared resource —
+                only add what the agent doesn't already know
+              </li>
+              <li>
+                <strong>Pushy description:</strong> Agents under-trigger skills
+                by default — be explicit about when to use them
+              </li>
+              <li>
+                <strong>Progressive disclosure:</strong> Point to detail docs
+                rather than inlining everything. The agent reads files on demand.
+              </li>
+              <li>
+                <strong>Transition:</strong> Before we move on, a warning about
+                where this can go wrong.
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: You already know that ═══════════ -->
+        <section class="slide-practical" data-background-color="#F5F0E8">
+          <h2>You already know that</h2>
+          <p class="concept-subtitle">
+            Don't write skills for things the model is already great at
+          </p>
+          <div class="comparison">
+            <div class="comparison-col bad">
+              <h3>✗ Skill stuffing</h3>
+              <div class="line">writing-typescript</div>
+              <div class="line">running-tests</div>
+              <div class="line">git-commit-best-practices</div>
+              <div class="line">how-to-write-good-code</div>
+              <div class="line">react-hooks-explained</div>
+            </div>
+            <div class="comparison-col good">
+              <h3>✓ Load-bearing</h3>
+              <div class="line">our-weird-internal-rpc</div>
+              <div class="line">deploy-to-staging-cluster</div>
+              <div class="line">cutting-a-release</div>
+              <div class="line">the-event-bus-pattern</div>
+              <div class="line">running-a-migration</div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                Before we look at the anti-pattern: useful skills generally
+                fall into two shapes. <strong>Reference</strong> skills capture
+                facts about your world — your internal RPC pattern, the staging
+                cluster's quirks, the reason your event bus is shaped weirdly.
+                <strong>Recipe</strong> skills capture procedures — adding an
+                endpoint, cutting a release, running a migration. Both are
+                valid.
+              </li>
+              <li>
+                The principle from AGENTS.md applies just as hard to skills:
+                don't fill the context window with things the model already
+                knows
+              </li>
+              <li>
+                The first failure mode teams hit after discovering skills is to
+                write skills for everything. A writing-typescript skill. A
+                running-tests skill. A git-commit-best-practices skill. These
+                are worse than useless — they consume context to tell the model
+                things it's better at than you are
+              </li>
+              <li>
+                A useful skill compresses something load-bearing about your
+                world. Things the model couldn't possibly know without you
+                telling it
+              </li>
+              <li>
+                A good gut check: if the skill's contents would be reasonable to
+                put in a public blog post, it probably shouldn't be a skill. If
+                it'd get you fired for posting it, that's a skill
+              </li>
+              <li>
+                Same principle, different surface — earn every line, earn every
+                skill
+              </li>
+              <li>
+                <strong>Transition:</strong> What if a skill is still a real
+                chonker, and we think it needs a whole context window of its
+                own?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE 14: Concept — Forked Skills ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <h2>You can't touch this</h2>
+          <p class="concept-subtitle">Forked skills, oh my</p>
+          <div class="fork-visual visual">
+            <div class="fork-box fork-main">
+              <div class="fork-label">MAIN CONTEXT</div>
+              <div class="fork-inner">Your session</div>
+            </div>
+            <div class="fork-arrow">⟶</div>
+            <div class="fork-box fork-isolated">
+              <div class="fork-label">ISOLATED CONTEXT</div>
+              <div class="fork-inner">Skill runs here</div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                Newer Claude Code feature: forked skill gets its own isolated
+                context window
+              </li>
+              <li>
+                Blurs the line between skills and subagents — context isolation
+                without managing agent delegation
+              </li>
+              <li>
+                Think of it as a spectrum: regular skill (shared context) →
+                forked skill (isolated, lightweight) → subagent (isolated, full
+                autonomy). Same principle at different weights.
+              </li>
+              <li>
+                <strong>Transition: </strong>One more primitive before we get
+                to everyone's favourite buzzword.
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: Mind the tool tax ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <span class="section-label">Tools</span>
+          <h2>Mind the tool tax</h2>
+          <p class="concept-subtitle">What the agent can do</p>
+          <div class="tool-stack visual">
+            <div class="label">TOOLS ATTACHED</div>
+            <div class="tool-stack-pills">
+              <span class="tool-name">bash</span>
+              <span class="tool-name">read</span>
+              <span class="tool-name">edit</span>
+              <span class="tool-name">grep</span>
+              <span class="tool-name">glob</span>
+              <span class="tool-name">write</span>
+              <span class="tool-name unused">mcp:linear</span>
+              <span class="tool-name">mcp:slack</span>
+              <span class="tool-name unused">mcp:notion</span>
+              <span class="tool-name unused">webfetch</span>
+            </div>
+            <div class="tool-tax-line">~12k tokens · every turn</div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                Tools are the verbs available to the agent — read a file, run a
+                shell command, hit an API. Every harness ships a default set
+                out of the box
+              </li>
+              <li>
+                You can extend that set in a few ways. The most common right
+                now is <strong>MCP</strong> — Model Context Protocol —
+                Anthropic's standard for exposing third-party services as
+                tools. Linear, Notion, Slack, your internal data warehouse —
+                anything with an MCP server can be plugged into your agent
+              </li>
+              <li>
+                The catch: every tool the agent could reach for sits in its
+                system prompt as a description, <em>every turn</em>. Whether
+                the agent uses it or not, you're paying for it. A team that
+                attaches a dozen MCP servers can quietly burn fifteen thousand
+                tokens of context before a session even starts
+              </li>
+              <li>
+                This is why MCP has been getting a more cautious reception
+                lately. The industry has been quietly rediscovering that bash
+                is already a universal protocol. Agents are excellent at
+                driving gh, psql, kubectl, aws directly. MCP earns its keep for
+                stateful, auth-heavy surfaces — for everything else, the CLI is
+                right there
+              </li>
+              <li>
+                Modern harnesses are responding with auto-discovery and lazy
+                tool loading — a tool's schema only materialises when the
+                agent actually wants to call it. A context-engineering response
+                to a context-engineering problem
+              </li>
+              <li>
+                <strong>Transition:</strong> So we've covered what the agent
+                knows and what it can do. What about how it splits work?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: Not Personas ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <span class="section-label">Subagents</span>
+          <div style="margin-bottom: 16px">
+            <span class="strikethrough-label">"The Testing Expert™"</span>
+            <span class="strikethrough-label"
+              >"The Architecture Specialist™"</span
+            >
+          </div>
+          <div class="replace-label">Focused context for a focused task.</div>
+          <aside class="notes">
+            <ul>
+              <li>
+                The temptation with subagents is to think of them as personas —
+                "you are the testing expert, you are the architecture guru."
+                That's cargo-culting. The model doesn't become better at testing
+                because you told it it's a specialist.
+              </li>
+              <li>
+                This is also where harnesses diverge the most in their
+                implementations. Claude Code handles subagent delegation
+                implicitly — the agent decides when to spawn a subagent on its
+                own. Something like opencode exposes it as a user-facing
+                primitive you control directly. Same concept, very different
+                ergonomics.
+              </li>
+              <li>
+                What actually makes a subagent useful is context isolation. A
+                subagent gets a fresh, focused context window dedicated to a
+                single concern. That's the value — not the role-play.
+              </li>
+              <li>
+                This is the same principle we've been talking about all along —
+                focus. Except now instead of curating what goes
+                <em>into</em> one context window, we're splitting work
+                <em>across</em>
+                multiple windows.
+              </li>
+              <li>
+                <strong>Transition:</strong> Once you see subagents as context-
+                shapers, you can spend that isolation in two different ways.
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: Workers and scouts ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <h2>Workers and scouts</h2>
+          <p class="concept-subtitle">Two modes, same primitive</p>
+          <div class="diagram visual">
+            <div class="diagram-card">
+              <h3>Workers</h3>
+              <p><em>"Go do this thing. Come back when it's done."</em></p>
+              <p style="margin-top: 12px">
+                Isolation spent on <strong>execution</strong>.
+              </p>
+            </div>
+            <div class="diagram-card">
+              <h3>Scouts</h3>
+              <p><em>"Go find out X. Come back with 200 words."</em></p>
+              <p style="margin-top: 12px">
+                Isolation spent on <strong>compression</strong>.
+              </p>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                Once people get the idea of subagents, they tend to reach for
+                them in one way — delegation. "Go build this feature in your
+                own context window." That's a valid use, and it's what most of
+                the agent-team patterns we'll see later are built on
+              </li>
+              <li>
+                But the more underused mode is scouting. You spin up a subagent
+                not to <em>do</em> work but to <em>find out</em> something.
+                Read fifty files. Map the call graph. Investigate a weird bug.
+                Come back with a tight summary
+              </li>
+              <li>
+                The reason this matters: a scout is a context filter. The
+                investigation might touch fifty files; what lands in the
+                parent's context is a 200-word report. You've turned an
+                expensive read into a cheap summary
+              </li>
+              <li>
+                This is the move that quietly underwrites adversarial review
+                later. A reviewer is structurally a scout — it goes off, looks
+                at a thing with fresh eyes, reports back. Once you internalise
+                the scout pattern, review stops feeling like a special case
+              </li>
+              <li>
+                Both modes are buying the same thing — isolation. They just
+                spend it differently. Workers spend it on doing. Scouts spend
+                it on seeing
+              </li>
+              <li>
+                <strong>Transition:</strong> So what does that actually look
+                like in practice?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE 17: Practical — Subagent Diagram ═══════════ -->
+        <section class="slide-practical" data-background-color="#F5F0E8">
+          <h2>We're not friends</h2>
+          <p class="concept-subtitle">Context isolation in practice</p>
+          <div class="isolation-example">
+            <div class="isolation-task">
+              <div class="isolation-task-label">
+                One task, too many concerns for one context
+              </div>
+            </div>
+            <div class="isolation-arrow">↓ split by concern</div>
+            <div class="isolation-agents">
+              <div class="isolation-agent">
+                <div class="child-label">Agent A</div>
+                <div class="isolation-concern">Only sees implementation</div>
+              </div>
+              <div class="isolation-agent">
+                <div class="child-label">Agent B</div>
+                <div class="isolation-concern">Only sees documentation</div>
+              </div>
+              <div class="isolation-agent">
+                <div class="child-label">Agent C</div>
+                <div class="isolation-concern">Only sees code review</div>
+              </div>
+            </div>
+            <div class="isolation-note">
+              Each agent has a discrete piece of work with a full context window
+              to dedicate to it
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                Here's what context isolation looks like in practice. You've got
+                one task that touches too many concerns for a single context
+                window to handle well — implementation, docs, review.
+              </li>
+              <li>
+                Instead of stuffing all of that into one session where the agent
+                is juggling everything at once, you split by concern. Each
+                subagent only sees what it needs to do its job.
+              </li>
+              <li>
+                Agent A doesn't know about the docs. Agent B doesn't know about
+                the implementation details. That's a feature, not a bug — it
+                means each one gets a full, clean context window dedicated
+                entirely to its piece.
+              </li>
+              <li>
+                This is basically the single-responsibility principle, but for
+                context windows instead of classes.
+              </li>
+              <li>
+                <strong>Transition:</strong> Okay, so we've covered the
+                primitives — instructions, skills, and subagents. Let's talk
+                about how they compose into patterns.
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="slide-transition" data-background-color="#1A1614">
+          <span class="section-label">Patterns</span>
+          <h2>How does it all fit together?</h2>
+          <aside class="notes">
+            <ul>
+              <li>
+                So we've covered the three building blocks — AGENTS.md for the
+                baseline, skills for on-demand context, and subagents for
+                context isolation.
+              </li>
+              <li>
+                Each of those is useful on its own, but the real leverage comes
+                from how you compose them together into repeatable patterns.
+              </li>
+              <li>
+                We're going to look at three: spec-driven autonomous loops,
+                agent teams, and adversarial review.
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <h2>Let's go on holiday</h2>
+          <p class="concept-subtitle">Spec-driven & autonomous coding</p>
+          <div class="flow visual">
+            <div class="flow-step accent">Spec</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">Agent</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">Run</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">Check</div>
+            <span class="flow-arrow">→</span>
+            <div class="flow-step">Fix</div>
+            <span class="flow-arrow">↻</span>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                This slide is really two ideas that reinforce each other —
+                spec-driven development, and autonomous loops.
+              </li>
+              <li>
+                Spec-driven is the more fundamental one. Even without full
+                autonomy, externalising your intent into a spec file pays off
+                immediately. Plan-mode features in most harnesses are a form of
+                this — you write a plan together, it saves it to a file, then
+                spins up a fresh agent that picks up that plan as external context. Clean
+                window, clear intent. LLMs don't have cross-session memory, so
+                the spec becomes the thing that carries intent, decisions, and
+                constraints across sessions.
+              </li>
+              <li>
+                The autonomous loop layers on top of that. Each iteration is a
+                totally fresh session — the agent implements, checks, updates
+                the spec with what it did, and exits. The next agent boots into
+                a clean context, reads the updated spec, and picks up where the
+                last one left off. That's how you avoid rot — you're never in
+                one session long enough for it to degrade.
+              </li>
+              <li>
+                The "check" step is critical — tests, type-checking, linting.
+                Without that feedback loop it's just vibes.
+              </li>
+              <li>
+                When this pattern works well, you can genuinely kick it off and
+                go make a coffee. When it doesn't, it's almost always because
+                the spec was underspecified or there was no automated check to
+                keep it honest.
+              </li>
+              <li>
+                <strong>Transition:</strong> What if we want multiple agents
+                working on different parts of the same spec?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <h2>Let's build an army</h2>
+          <p class="concept-subtitle">Agent teams & swarms</p>
+          <div class="visual">
+            <div class="team-layout">
+              <div class="team-spec">
+                <div class="team-spec-label">Shared spec</div>
+                <div class="team-spec-desc">
+                  Every agent reads the same spec, loads only its own files
+                </div>
+              </div>
+              <div class="team-agents">
+                <div class="team-agent">
+                  <div class="child-label">Implementation</div>
+                  <div class="child-files">source files</div>
+                </div>
+                <div class="team-agent">
+                  <div class="child-label">Tests</div>
+                  <div class="child-files">test files</div>
+                </div>
+                <div class="team-agent">
+                  <div class="child-label">Docs</div>
+                  <div class="child-files">documentation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                This is the natural extension — instead of one agent looping
+                through a spec, you fan out multiple agents working in parallel,
+                each responsible for a different concern.
+              </li>
+              <li>
+                They all read the same spec, so they share the same
+                understanding of what needs to happen. But each one only loads
+                the files relevant to its job. Implementation doesn't see test
+                files. Tests don't see docs. Focused context, in parallel.
+              </li>
+              <li>
+                The spec is one coordination mechanism, but agents working in
+                parallel also need to avoid stepping on each other's work.
+                Different harnesses take very different approaches here. Claude
+                Code's agent teams use a shared task list with file-level locks
+                so two teammates can't claim the same work, plus inbox-based
+                messaging between agents and isolated git worktrees per agent
+                to prevent file conflicts. Kimi's agent swarm takes the
+                opposite approach — a trained orchestrator that decomposes a
+                task and dynamically spawns sub-agents to run in parallel,
+                coordinating them centrally rather than having peers negotiate.
+                One is bottom-up coordination between equals, the other is
+                top-down orchestration. Both experimental, both tackling the
+                same fundamental problem from very different angles.
+              </li>
+              <li>
+                Fair warning though: this is all bleeding edge. Coordinating
+                agents that write to the same codebase introduces real
+                challenges — merge conflicts, race conditions, agents stepping
+                on each other's work. Powerful, but not free.
+              </li>
+              <li>
+                <strong>Transition:</strong> So what happens after the agents
+                have done their work? How do we keep them honest?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <h2>Let's fight</h2>
+          <p class="concept-subtitle">Adversarial review & backpressure</p>
+          <div class="back-pressure visual">
+            <div class="bp-box messy">
+              <h4>Builder's context</h4>
+              <p>
+                Full of the journey — false starts, back-and-forth, accumulated
+                assumptions
+              </p>
+            </div>
+            <div class="bp-arrow">→</div>
+            <div class="bp-box clean">
+              <h4>Reviewer's context</h4>
+              <p>Sees only the output. Catches what the builder can't.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                This is one of the most underrated patterns. After an agent
+                builds something, its context is full of the journey — false
+                starts, dead ends, accumulated assumptions. It's lost
+                objectivity on its own output.
+              </li>
+              <li>
+                So you spin up a fresh agent with a clean context whose only job
+                is to review what the builder produced. It has no baggage, no
+                sunk cost. It sees the code the way a colleague on your team
+                would see it in a PR.
+              </li>
+              <li>
+                This is backpressure — the reviewer pushes back on the builder.
+                And because the reviewer's context isn't polluted with the
+                builder's reasoning, it catches things the builder literally
+                can't see anymore.
+              </li>
+              <li>
+                You can wire this into an autonomous loop too — build, review,
+                fix, repeat. The tension between the two contexts is what
+                produces the quality.
+              </li>
+              <li>
+                <strong>Transition:</strong> One more pattern worth flagging
+                before we wrap.
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- ═══════════ SLIDE: Let's get weird ═══════════ -->
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <h2>Let's get weird</h2>
+          <p class="concept-subtitle">Patterns are ingredients, not recipes</p>
+          <div class="kitbash visual">
+            <svg
+              class="kitbash-squiggle"
+              viewBox="0 0 720 260"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M 20 150 C 70 30, 140 250, 200 100 C 240 -10, 310 240, 360 90 C 400 -20, 480 250, 540 90 C 580 10, 660 240, 700 130"
+                stroke="#c5654a"
+                stroke-width="6"
+                fill="none"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div class="kitbash-card k1">
+              <div class="kitbash-label">Spec loop</div>
+              <div class="kitbash-sub">Let's go on holiday</div>
+            </div>
+            <div class="kitbash-card k2">
+              <div class="kitbash-label">Agent teams</div>
+              <div class="kitbash-sub">Let's build an army</div>
+            </div>
+            <div class="kitbash-card k3">
+              <div class="kitbash-label">Adversarial review</div>
+              <div class="kitbash-sub">Let's fight</div>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                We've covered three patterns as if they're standalone things —
+                spec loops, agent teams, adversarial review. They're not. They
+                compose, and the real leverage shows up when you stack them
+              </li>
+              <li>
+                You could spec-drive a team. You could wire adversarial review
+                into a loop as the check step. You could put a scout subagent
+                inside a forked skill. None of these primitives or patterns are
+                jealous of each other
+              </li>
+              <li>
+                The meta-pattern is this: every pattern in this talk is a way
+                of taking something the talk's already covered — a context
+                window, a primitive — and spending it differently. Once you
+                internalise that, you stop reaching for "the right pattern" and
+                start asking "what context does this work actually need, and
+                how do I shape it?"
+              </li>
+              <li>
+                A good prompt when you're stuck: <em>what's the smallest
+                context window that could do this job? And what's the smallest
+                one that could check it?</em> The answer is often a
+                combination nobody's written down anywhere
+              </li>
+              <li>
+                The team in the room Monday morning will invent combinations I
+                haven't thought of. That's the point — these are ingredients,
+                not recipes
+              </li>
+              <li>
+                <strong>Transition:</strong> So let's bring it all together.
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="slide-concept" data-background-color="#F5F0E8">
+          <h2 style="font-size: 2.8em; line-height: 1.25">
+            Right information.<br />Right time.<br />Right amount.
+          </h2>
+          <div class="recap-items visual">
+            <div class="recap-item">
+              <span class="recap-label">AGENTS.md</span>
+              <span class="recap-desc">The baseline</span>
+            </div>
+            <div class="recap-item">
+              <span class="recap-label">Skills</span>
+              <span class="recap-desc">On-demand</span>
+            </div>
+            <div class="recap-item">
+              <span class="recap-label">Subagents</span>
+              <span class="recap-desc">Isolation</span>
+            </div>
+            <div class="recap-item">
+              <span class="recap-label">Patterns</span>
+              <span class="recap-desc">Composition</span>
+            </div>
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>
+                That's the whole talk in one sentence. Context engineering is
+                about getting the right information into the right context
+                window at the right time, and not a token more.
+              </li>
+              <li>
+                AGENTS.md gives you the baseline — the stuff every session
+                needs. Skills give you on-demand context — loaded only when
+                relevant. Subagents give you isolation — fresh windows for
+                focused work. And patterns give you composition — ways to wire
+                all of that together into something bigger than the sum of its
+                parts.
+              </li>
+              <li>
+                None of this is magic. It's the same kind of thinking we already
+                do as engineers — separation of concerns, progressive
+                disclosure, single responsibility. We're just applying it to a
+                new kind of runtime.
+              </li>
+              <li>
+                <strong>Transition:</strong> Open floor — what's working, what's
+                not, what do you want to try?
+              </li>
+            </ul>
+          </aside>
+        </section>
+
+        <section class="slide-discussion" data-background-color="#F5F0E8">
+          <h1>Discussion</h1>
+          <div class="prompt">
+            What's working? What's not? What do you want to try?
+          </div>
+          <aside class="notes">
+            <ul>
+              <li>Open floor</li>
+            </ul>
+          </aside>
+        </section>
+      </div>
+      <!-- /slides -->
+    </div>
+    <!-- /reveal -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/plugin/notes/notes.min.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        width: 1280,
+        height: 720,
+        margin: 0,
+        center: true,
+        controls: false,
+        transition: "fade",
+        transitionSpeed: "fast",
+        backgroundTransition: "fade",
+        plugins: [RevealNotes],
+      });
+    </script>
+  </body>
+</html>
