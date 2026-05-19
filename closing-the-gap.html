@@ -1415,7 +1415,7 @@
               <div class="harness-concept-detail">What the agent can do</div>
             </div>
             <div class="harness-concept">
-              <div class="harness-concept-label">Agents</div>
+              <div class="harness-concept-label">Subagents</div>
               <div class="harness-concept-detail">Isolated context workers</div>
             </div>
           </div>
@@ -1634,21 +1634,23 @@
                 only add what the agent doesn't already know
               </li>
               <li>
-                <strong>Pushy description:</strong> Agents under-trigger skills
-                by default — be explicit about when to use them
+                <strong>Pushy description:</strong> In most harnesses the
+                description field is what the agents use to determine whether a
+                skill should be used. Be explicit here about <em>when</em> your
+                skill should be invoked
               </li>
               <li>
-                <strong>Progressive disclosure:</strong> Point to detail docs
+                <strong>Progressive disƒclosure:</strong> Point to detail docs
                 rather than inlining everything. The agent reads files on
                 demand.
               </li>
               <li>
                 Finally, useful skills generally fall into two shapes.
-                <strong>Reference</strong> skills capture facts about your world
-                — your internal APIs, deployment quirks, design system
-                conventions. <strong>Workflow</strong> skills capture procedures
-                — adding an endpoint, cutting a release, running a migration.
-                Both are valid.
+                <em>Reference</em> skills capture facts about your world — your
+                internal APIs, deployment quirks, design system conventions.
+                <em>Workflow</em> skills capture procedures — adding an
+                endpoint, cutting a release, running a migration. Both are
+                valid.
               </li>
               <li>
                 <strong>Transition:</strong> Before we move on, a warning about
@@ -1711,7 +1713,7 @@
               </li>
               <li>
                 <strong>Transition:</strong> So that's even more instructions,
-                but how do agents _do_ things
+                but how do agents <em>do</em> things
               </li>
             </ul>
           </aside>
@@ -1748,24 +1750,26 @@
               <li>
                 You can extend that set in a few ways. The most common right now
                 is <strong>MCP</strong> — Model Context Protocol — a standard
-                for exposing third-party services as tools. Linear, Notion,
-                Slack, your internal data warehouse — anything with an MCP
-                server can be plugged into your agent
+                for exposing third-party services as tools.
               </li>
               <li>
-                The catch: every tool the agent has sits in its system prompt as
-                a description, <em>every turn</em>. Whether the agent uses it or
-                not, you're paying for it. A team that attaches a dozen MCP
-                servers can quietly burn fifteen thousand tokens of context
+                The catch: the definition of every tool the agent has sits in
+                its system prompt, <em>every turn</em>. Whether the agent uses
+                it or not, you're paying for it. A team that attaches a dozen
+                MCP servers can quietly burn fifteen thousand tokens of context
                 before a session even starts
               </li>
               <li>
                 Because of this attitudes towards MCP have been cooling
                 drastically, and we're realising that bash is already a
                 universal protocol. Agents are excellent at driving gh, psql,
-                aws, etc directly. MCP still has a place for stateful,
-                auth-heavy integrations — for everything else, the CLI is right
-                there
+                aws, etc directly.
+              </li>
+              <li>
+                MCP still has a place for stateful, auth-heavy integrations. But
+                if you're tempted to write or reach for an MCP, especially for
+                something that happens locally, consider wrapping up a CLI in a
+                skill instead
               </li>
               <li>
                 Modern harnesses are also shipping mitigations to this,
@@ -1854,27 +1858,24 @@
           </div>
           <aside class="notes">
             <ul>
+              <li>Two common patterns here: workers and scouts</li>
               <li>
-                Once people get the idea of subagents, they tend to reach for
-                them in one way — delegation. "Go build this feature in your own
-                context window." That's a valid use, and it's what orchestration
-                patterns we'll see later are built on
+                The most common use-case for subagents is delegation. "Go build
+                this feature in your own context window." That's a valid use,
+                and it's what orchestration patterns we'll see later are built
+                on
               </li>
               <li>
-                Another somewhat underused mode is scouting. You spin up a
+                Another somewhat underused pattern is scouting. You spin up a
                 subagent not to <em>do</em> work but to
                 <em>find out</em> something. Read fifty files. Map the call
-                graph. Investigate a weird bug. Come back with a tight summary.
+                graph of a complex operation. Investigate a weird bug. Come back
+                with a tight summary.
               </li>
               <li>
                 This is something most harnesses already do implicitly, if
                 Claude Code needs to read any more than a few files it'll fire
-                off an explore agent using the cheap Haiku model to report back
-              </li>
-              <li>
-                This matters for the same reason isolating implementation can,
-                by filtering context. A subagent may read 50 files and return a
-                few dot points to the parent's context window.
+                off its explore agent using the cheap Haiku model to report back
               </li>
               <li>
                 <strong>Transition:</strong> So what does that actually look
@@ -1899,7 +1900,7 @@
               <div class="isolation-agent">
                 <div class="child-label">Agent A</div>
                 <div class="isolation-concern">
-                  Only sees docs & codebase exploration
+                  Only sees codebase exploration
                 </div>
               </div>
               <div class="isolation-agent">
@@ -1919,10 +1920,9 @@
           <aside class="notes">
             <ul>
               <li>
-                Here's what context isolation looks like in practice. One task
-                that touches too many concerns for a single context —
-                investigate the existing code, implement the change, review the
-                changes.
+                We have one task that touches too many concerns for a single
+                context — investigate the existing code, implement the change,
+                review the changes.
               </li>
               <li>
                 Rather than juggling all of that and stuffing it into one
@@ -1936,11 +1936,7 @@
                 It's the single-responsibility principle, but for context
                 windows instead of code.
               </li>
-              <li>
-                <strong>Transition:</strong> Okay, so we've covered the
-                primitives — instructions, skills, tools, and subagents. How
-                does it all come together in practice?
-              </li>
+              <li><strong>Transition:</strong> [just change slide]</li>
             </ul>
           </aside>
         </section>
@@ -1951,17 +1947,13 @@
           <aside class="notes">
             <ul>
               <li>
-                So we've covered the four building blocks — AGENTS.md for the
-                baseline, skills for on-demand context, tools for getting stuff
-                done, and subagents for context isolation.
+                So we've covered the primitives — instructions for the baseline,
+                skills for on-demand context, tools for getting stuff done, and
+                subagents for context isolation.
               </li>
               <li>
-                Each of those is useful on its own, but the real leverage comes
-                from how you compose them together into repeatable patterns.
-              </li>
-              <li>
-                We're going to look at three: spec-driven autonomous loops,
-                agent teams, and adversarial review.
+                Each of those is useful on its own, but let's talk about
+                composing them together into repeatable patterns.
               </li>
             </ul>
           </aside>
@@ -1985,34 +1977,34 @@
           <aside class="notes">
             <ul>
               <li>
-                This slide is really two ideas that reinforce each other —
+                First up is really two ideas that reinforce each other —
                 spec-driven development, and autonomous loops.
               </li>
               <li>
-                Spec-driven is the more fundamental one. Even without full
-                autonomy, externalising your intent into a spec file pays off
-                immediately. Plan-mode features in most harnesses are a form of
-                this — you write a plan together, it saves it to a file, then
-                spins up a fresh agent that picks up that plan as external
-                context. Clean window, clear intent, no focus drift from all the
-                decisions along the way.
+                Spec-driven development is the more fundamental one. The idea is
+                that you externalise your intent into markdown files, rather
+                than continuing from a conversation with an agent. Plan-mode
+                features in most harnesses are a form of this — you write a plan
+                together, it saves it to a file, then spins up a fresh agent
+                that picks up that plan as external context. Clean window, clear
+                intent, no focus drift from all the decisions along the way.
               </li>
               <li>
                 The autonomous loop layers on top of that. You may have heard of
-                this as the Ralph pattern, named after Ralph Wiggum from the
-                Simpsons, who wasn't terribly bright but just kept on trying
+                this referred to as Ralph loops, named after Ralph Wiggum from
+                the Simpsons, who wasn't terribly bright but just kept on trying
                 until something happened.
               </li>
               <li>
                 The basic idea is that you setup a loop that reads a plan, does
                 precisely one task, updates the plan, then exits. The next agent
-                boots into a clean context, reads the updated spec, and picks up
-                where the last one left off. No matter how massive the plan,
+                boots into a clean context, reads the updated plan, and picks up
+                where the last agent left off. No matter how massive the plan,
                 you're never in one session long enough for it to degrade.
               </li>
               <li>
                 The "check" step is critical. For this pattern to work you need
-                concrete success criteria and backpressure — passing tests,
+                concrete success conditions and backpressure — passing tests,
                 objective acceptance criteria, something even Ralph Wiggum could
                 say "yep I did it" before signing off for the next agent.
               </li>
@@ -2144,10 +2136,7 @@
                 powerful model like Sonnet is a perfectly capable implementer,
                 so save Opus to review its work at the end.
               </li>
-              <li>
-                <strong>Transition:</strong> But none of these patterns are
-                written in stone
-              </li>
+              <li><strong>Transition:</strong> [just next slide]</li>
             </ul>
           </aside>
         </section>
@@ -2237,6 +2226,7 @@
           </div>
           <aside class="notes">
             <ul>
+              <li>Right information. Right time. Right amount.</li>
               <li>
                 That's the whole talk in one sentence. Context engineering is
                 about getting the right information into the right context
@@ -2254,8 +2244,9 @@
                 None of this is magic. It's the same kind of thinking we already
                 do as engineers — separation of concerns, progressive
                 disclosure, single responsibility. We're just applying it to a
-                new kind of runtime.
+                new kind of environment.
               </li>
+              <li><strong>Transition:</strong> [just next slide]</li>
             </ul>
           </aside>
         </section>
