@@ -1276,8 +1276,7 @@
               </li>
               <li>
                 Basically, everything that has happened in the current session
-                (instructions, conversation, files read, tool uses) along with
-                whatever system prompts it has
+                (instructions, conversation, files read, tool uses, etc)
               </li>
               <li>
                 That window has real constraints that degrade results if you
@@ -1379,10 +1378,7 @@
                 to the more recent context
               </li>
 
-              <li>
-                <strong>Transition:</strong> So let's talk about the tools we
-                have at our disposal to mitigate these constraints
-              </li>
+              <li><strong>Transition:</strong> [just next slide]</li>
             </ul>
           </aside>
         </section>
@@ -1422,10 +1418,11 @@
           <aside class="notes">
             <ul>
               <li>
-                But before we do, it's important to realise almost nothing we're
-                going to talk about today is inherent to LLMs themselves.
-                They're orchestration patterns introduced by pieces of software,
-                the harnesses
+                Before we get into the tools we have to manage context, it's
+                important to realise almost nothing we're going to talk about
+                today is inherent to the models themselves. They're
+                orchestration patterns introduced by pieces of software, the
+                harnesses
               </li>
               <li>
                 Harnesses are converging on something approaching standards,
@@ -1441,6 +1438,10 @@
                 We'll use generic terms throughout, but the ideas map onto
                 whichever harness you're using
               </li>
+              <li>
+                <strong>Transition:</strong> So let's talk about the tools we
+                have at our disposal to mitigate those context constraints
+              </li>
             </ul>
           </aside>
         </section>
@@ -1453,8 +1454,8 @@
           <aside class="notes">
             <ul>
               <li>
-                The first tool we have at our disposal is system instructions —
-                a markdown file at the project root that most harnesses load
+                The first mechanism we can use is system instructions — a
+                markdown file at the project root that most harnesses load
                 automatically. AGENTS.md is the emerging cross-tool convention;
                 Claude Code calls it CLAUDE.md, Cursor has its own rules format,
                 but they all do the same job
